@@ -76,7 +76,9 @@ public class ChromaColorPicker: UIControl, ChromaControlStylable {
             positionHandle(handle, forColorLocation: location)
         }
         
-        setBrightnessSliderColor(handle:currentHandle)
+        if let handle = currentHandle {
+            setBrightnessSliderColor(handle:handle)
+        }
     }
     
     // MARK: - Public

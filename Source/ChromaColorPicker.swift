@@ -75,6 +75,8 @@ public class ChromaColorPicker: UIControl, ChromaControlStylable {
             handle.frame.size = handleSize
             positionHandle(handle, forColorLocation: location)
         }
+        
+        setBrightnessSliderColor()
     }
     
     // MARK: - Public
@@ -112,16 +114,20 @@ public class ChromaColorPicker: UIControl, ChromaControlStylable {
                 colorWheelView.bringSubviewToFront(handle)
                 animateHandleScale(handle, shouldGrow: true)
                 
-                if let slider = brightnessSlider {
-                    slider.trackColor = handle.color.withBrightness(1)
-                    slider.currentValue = slider.value(brightness: handle.color.brightness)
-                }
+                setBrightnessSliderColor()
                 
                 currentHandle = handle
                 return true
             }
         }
         return false
+    }
+    
+    private func setBrightnessSliderColor() {
+        if let slider = brightnessSlider {
+            slider.trackColor = handle.color.withBrightness(1)
+            slider.currentValue = slider.value(brightness: handle.color.brightness)
+        }
     }
     
     public override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
